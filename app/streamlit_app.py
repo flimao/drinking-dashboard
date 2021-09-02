@@ -36,6 +36,6 @@ cols[1].metric('Variação MoM', f'{avg_mm:.0%}', f'{avg_mm - 1:.0%}')
 
 st.subheader('DataFrame a ser utilizado para o projeto')
 
-df = pd.read_csv(r'app/datasets/alcool-expect_vida-religiao.csv')
+df = pd.read_csv(r'datasets/alcool-expect_vida-religiao.csv')
 
 st.dataframe(df)
