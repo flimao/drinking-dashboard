@@ -1,7 +1,11 @@
 import time
+import pandas as pd
 import streamlit as st
-import plotly 
+import plotly
 
+############
+## Inicio ##
+############
 
 st.title('Hello, *World!* :sunglasses:')
 
@@ -29,3 +33,9 @@ avg_mm = 0.7
 
 cols = st.columns(3)
 cols[1].metric('Variação MoM', f'{avg_mm:.0%}', f'{avg_mm - 1:.0%}')
+
+st.subheader('DataFrame a ser utilizado para o projeto')
+
+df = pd.read_csv(r'..\datasets\alcool-expect_vida-religiao.csv')
+
+st.dataframe(df)
