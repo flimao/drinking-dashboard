@@ -12,3 +12,4 @@ Dashboard relacionando consumo de álcool de vários países e sua expectativa d
 - [Our World in Data: Alcohol Consumption](https://ourworldindata.org/alcohol-consumption)
 - [Kaggle - Alcohol & Life Expectancy](https://www.kaggle.com/rishidamarla/alcohol-life-expectancy)
 - [Fivethirtyeight - Data & code](https://github.com/fivethirtyeight/data)
+- [Dados de Religião por país das Nações Unidas](https://data.un.org/Data.aspx?d=POP&f=tableCode%3A28)
