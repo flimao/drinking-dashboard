@@ -6,6 +6,7 @@ import plotly.express as px
 
 dfrel = pd.read_csv(r'datasets/religiao-tratado.csv')
 
+# função para calcular as n maiores religioes, considerando o número de países que as seguem
 def topnrels(n, df = dfrel):
     toprels = df.MajorReligion.value_counts().head(n)
     s = df.MajorReligion.where(df.MajorReligion.isin(toprels.index), 'Outros')
@@ -13,6 +14,7 @@ def topnrels(n, df = dfrel):
     s.astype('category')
     return s
 
+# import e processamento do dataset principal
 df_raw = pd.read_csv(r'datasets/alcool-expect_vida-religiao.csv')
 df_full = (df_raw
     .astype({
@@ -25,9 +27,7 @@ df = df_full[(df_full.Year > 1960) & (df_full.Year <= 2011)]
 df['MajorReligion_top'] = topnrels(5)
 df['Total_BottlesWinePerMonth'] = df['Total_LitersAlcPerYear'] * (1 / (0.12 * 0.75 * 12))
 
-
-top5rel = dfrel.MajorReligion.value_counts()
-
+# labels das colunas, para rotular nos gráficos
 labels = {
     'LifeExp': 'Expectativa de vida',
     'Total_LitersAlcPerYear': 'Litros de álcool puro consumidos por ano por pessoa',
@@ -39,6 +39,13 @@ labels = {
     'MajorReligion_top': 'Religião'
 }
 
+# construção do mapa de cores consistente em todos os gráficos
+regions = df['Region'].unique()
+color_palette = px.colors.qualitative.G10
+
+region_colors = { region: color for region, color in zip(regions, color_palette[:len(regions)]) }
+
+# este texto estará em todas as conclusões parciais
 conclusao = r'**_Pontos notáveis_**:'
 
 
@@ -59,23 +66,19 @@ st.markdown(
         unsafe_allow_html=True,
     )
 
+# aqui começa o conteúdo
 st.title('Análise de consumo de álcool :beer:, expectativa de vida :older_woman: e religião :pray: em cada país')
 
 st.header('Premissa')
-# st.caption('Fine, I guess?..')
-
 st.write('Vamos analisar a relação entre o consumo de álcool (cerveja, vinho e bebidas destiladas), a expectativa de vida e a religião de cada país')
 
 st.subheader('Conjunto de dados a ser utilizado para o projeto (amostra)')
-
 st.dataframe(df.sample(5))
 
-regions = df['Region'].unique()
-color_palette = px.colors.qualitative.G10
-
-region_colors = { region: color for region, color in zip(regions, color_palette[:len(regions)]) }
-
+# aqui começam os gráficos
 st.header('Investigação')
+
+### gráfico de linha para mostrar a evolução do consumo de bebidas alcoólicas ao longo do tempo por regiao
 dfline = df.groupby(['Year', 'Region']).mean().reset_index()
 alcline = px.scatter(dfline, 
     x = 'Year', y = 'Total_BottlesWinePerMonth', 
@@ -85,11 +88,9 @@ alcline = px.scatter(dfline,
 
 alcline.update_traces(
     mode = 'lines',
-    #text = dfline['Region'],
     hovertemplate =
         '<b>%{fullData.name}</b><br>' + 
         labels['Total_BottlesWinePerMonth'] +': %{y:.1f} garrafas'+
-        #'<br>Ano: %{x}<br>'+
         '<extra></extra>'
 )
 
@@ -103,7 +104,7 @@ alcline.update_layout(
 st.plotly_chart(alcline)
 
 st.success(fr'''{conclusao}
-A Europa é a maior consumidora de bebidas alcólicas, bebendo em média 40% a mais que as Américas (2ª maior consumidora).
+A Europa é a maior consumidora de bebidas alcoólicas, bebendo em média 40% a mais que as Américas (2ª maior consumidora).
 
 
 Há um aumento de ± 25% no consumo de álcool da Europa na década de 70. Este aumento se reverteu lentamente durante a década de 80, até se estabilizar no nível anterior.
@@ -111,7 +112,7 @@ Há um aumento de ± 25% no consumo de álcool da Europa na década de 70. Este 
 Esse aumento pontual não foi observado nas outras regiões.
 ''')
 
-### SCATTER
+### gráfico de barras do consumo de álcool por religião
 st.markdown('---')
 
 dfrel = df.groupby(['MajorReligion_top']).agg(
@@ -144,14 +145,15 @@ barrel.update_layout(
 st.plotly_chart(barrel)
 
 st.success(rf'''{conclusao} 
-As pessoas que se dizem **Católicos Romanos** (ou equivalente), **Budistas** ou de outras religiões são as que mais consomem bebidas alcólicas, 
+As pessoas que se dizem **Católicos Romanos** (ou equivalente), **Budistas** ou de outras religiões são as que mais consomem bebidas alcoólicas, 
 consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
     
 **Anglicanos** bebem substancialmente menos que Católicos Romanos, consumindo por volta de 1.5 garrafa de vinho por mês por pessoa.
 
-As pessoas que se dizem sem religião tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcólica.
+As pessoas que se dizem sem religião tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
 ''')
 
+### relação entre consumo de bebidas alcoólicas e expectativa de vida
 sct = px.scatter(df, y = 'LifeExp', x = 'Total_BottlesWinePerMonth', 
     range_x = [df.Total_LitersAlcPerYear.min(), 20], 
     range_y = [df.LifeExp.min(), df.LifeExp.max()], 
@@ -172,7 +174,7 @@ st.plotly_chart(sct)
 
 st.info(fr'Parece que não há uma relação muito clara entre a quantidade de álcool consumida e a expectativa de vida, mesmo se separarmos por região.')
 
-### MAPAS
+### mapa de consumo de bebidas alcoólicas ao longo do tempo
 
 st.markdown('---')
 st.header('Mapas')
@@ -187,12 +189,12 @@ mapa.update_layout(
     autosize=False,
     width=1100,
     height=600,
-    title = 'Consumo de bebidas alcoolicas (em garrafas de vinho equivalentes por mês por pessoa, entre 1960 e 2011)' 
+    title = 'Consumo de bebidas alcoólicas (em garrafas de vinho equivalentes por mês por pessoa, entre 1960 e 2011)' 
 )
 
 st.plotly_chart(mapa)
 
 st.success(fr'''{conclusao}
-Até meados da década de 80, A Austrália, o Chile e a Europa como um todo consumiam grandes quantidades de bebidas alcólicas. Desde então, ...
+Até meados da década de 80, A Austrália, o Chile e a Europa como um todo consumiam grandes quantidades de bebidas alcoólicas. Desde então, ...
 
 ''')
