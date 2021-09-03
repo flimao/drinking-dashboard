@@ -4,16 +4,16 @@ Anguilla,Anglican,AIA
 Antigua and Barbuda,Anglican,ATG
 Armenia,Armenian Apostolic,ARM
 Aruba,Roman Catholic,ABW
-Australia,Catholic,AUS
+Australia,No Religion,AUS
 Austria,Roman Catholic,AUT
 Bahamas,Baptist,BHS
 Bahrain,Muslim,BHR
 Bangladesh,Muslim,BGD
 Barbados,Anglican,BRB
 Belize,Roman Catholic,BLZ
-Bermuda,Anglican,BMU
+Bermuda,None,BMU
 Botswana,Christian,BWA
-Brazil,Catholic,BRA
+Brazil,Roman Apostolic Catholic,BRA
 British Virgin Islands,Methodist,VGB
 Brunei Darussalam,Muslim,BRN
 Bulgaria,Eastern Orthodox,BGR
@@ -23,16 +23,16 @@ Cambodia,Buddhist,KHM
 Canada,Roman Catholic,CAN
 Cayman Islands,Church of God,CYM
 Chile,Catholic,CHL
-Cook Islands,Christian,COK
+Cook Islands,Cook Islands Christian Church,COK
 Croatia,Catholic,HRV
 Cyprus,Orthodox,CYP
-Czechia,No Religion,CZE
+Czechia,Unknown,CZE
 Côte d'Ivoire,Muslim,CIV
 Dominica,Roman Catholic,DMA
 Estonia,No Religion,EST
 Ethiopia,Orthodox,ETH
 Falkland Islands (Malvinas),Christian,FLK
-Fiji,Christian,FJI
+Fiji,Methodist,FJI
 Finland,Lutheran,FIN
 Georgia,Christian Orthodox,GEO
 Germany,Other,DEU
@@ -49,13 +49,13 @@ Israel,Jewish,ISR
 Jamaica,No Religion,JAM
 Kazakhstan,Islam ,KAZ
 Kenya,Protestant,KEN
-Kiribati,African Methodist Episcopal Church,KIR
+Kiribati,Catholic,KIR
 Lao People's Democratic Republic,Buddhist,LAO
 Liberia,Christian,LBR
 Liechtenstein,Roman Catholic,LIE
 Lithuania,Roman Catholic,LTU
 Malawi,Christian,MWI
-Malaysia,Islam ,MYS
+Malaysia,Total,MYS
 Maldives,Islam ,MDV
 Marshall Islands,Protestant,MHL
 Mauritius,Hindu,MUS
@@ -64,7 +64,7 @@ Micronesia (Federated States of),Roman Catholic,FSM
 Mongolia,Buddhist,MNG
 Montenegro,Christian Orthodox,MNE
 Montserrat,Anglican,MSR
-Mozambique,No Religion,MOZ
+Mozambique,Catholic,MOZ
 Myanmar,Buddhist,MMR
 Nepal,Hindu,NPL
 New Zealand,No Religion,NZL
@@ -84,11 +84,11 @@ Republic of Korea,No Religion,KOR
 Republic of Moldova,Orthodox,MDA
 Romania,Orthodox,ROU
 Rwanda,Catholic,RWA
-Saint Helena ex. dep.,Church of England,SHN
+Saint Helena ex. dep.,Anglican,SHN
 Saint Lucia,Roman Catholic,LCA
 Saint Vincent and the Grenadines,Anglican,VCT
 Samoa,Congregational,WSM
-Sao Tome and Principe,Catholic,STP
+Sao Tome and Principe,Roman Apostolic Catholic,STP
 Serbia,Serbian Orthodox,SRB
 Seychelles,Roman Catholic,SYC
 Singapore,Buddhist,SGP
@@ -96,7 +96,7 @@ Sint Maarten (Dutch part),Roman Catholic,SXM
 Slovakia,Roman Catholic,SVK
 Slovenia,Catholic,SVN
 South Africa,No Religion,ZAF
-Sri Lanka,Buddhist,LKA
+Sri Lanka,Buddhist,
 State of Palestine,Islam ,PSE
 Suriname,Christian,SUR
 Switzerland,Roman Catholic,CHE
