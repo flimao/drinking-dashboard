@@ -39,6 +39,7 @@ labels = {
     'MajorReligion_top': 'Religião'
 }
 
+conclusao = r'**_Pontos notáveis_**:'
 
 
 ############
@@ -101,11 +102,13 @@ alcline.update_layout(
 
 st.plotly_chart(alcline)
 
-st.markdown(r'**_Conclusão_**: A Europa é a maior consumidora de bebidas alcólicas, bebendo em média 40% a mais que as Américas (2ª maior consumidora).')
-st.markdown('''
-    Há um aumento de ± 25% no consumo de álcool da Europa na década de 70. Este aumento se reverteu lentamente durante a década de 80, até se estabilizar no nível anterior.'
+st.success(fr'''{conclusao}
+A Europa é a maior consumidora de bebidas alcólicas, bebendo em média 40% a mais que as Américas (2ª maior consumidora).
+
+
+Há um aumento de ± 25% no consumo de álcool da Europa na década de 70. Este aumento se reverteu lentamente durante a década de 80, até se estabilizar no nível anterior.
     
-    Esse aumento pontual não foi observado nas outras regiões.
+Esse aumento pontual não foi observado nas outras regiões.
 ''')
 
 ### SCATTER
@@ -140,13 +143,13 @@ barrel.update_layout(
 
 st.plotly_chart(barrel)
 
-st.markdown(r'''
-    **_Conclusão_**: As pessoas que se dizem **Católicos Romanos** (ou equivalente), **Budistas** ou de outras religiões são as que mais consomem bebidas alcólicas, 
-    consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
+st.success(rf'''{conclusao} 
+As pessoas que se dizem **Católicos Romanos** (ou equivalente), **Budistas** ou de outras religiões são as que mais consomem bebidas alcólicas, 
+consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
     
-    **Anglicanos** bebem substancialmente menos que Católicos Romanos, consumindo por volta de 1.5 garrafa de vinho por mês por pessoa.
+**Anglicanos** bebem substancialmente menos que Católicos Romanos, consumindo por volta de 1.5 garrafa de vinho por mês por pessoa.
 
-    As pessoas que se dizem sem religião tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcólica.
+As pessoas que se dizem sem religião tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcólica.
 ''')
 
 sct = px.scatter(df, y = 'LifeExp', x = 'Total_BottlesWinePerMonth', 
@@ -167,7 +170,7 @@ sct.update_layout(
 
 st.plotly_chart(sct)
 
-st.markdown(r'**_Conclusão:_** Parece que não há uma relação muito clara entre a quantidade de álcool consumida e a expectativa de vida, mesmo se separarmos por região.')
+st.info(fr'Parece que não há uma relação muito clara entre a quantidade de álcool consumida e a expectativa de vida, mesmo se separarmos por região.')
 
 ### MAPAS
 
@@ -189,7 +192,7 @@ mapa.update_layout(
 
 st.plotly_chart(mapa)
 
-st.markdown(r'''**_Conclusão_**:
+st.success(fr'''{conclusao}
 Até meados da década de 80, A Austrália, o Chile e a Europa como um todo consumiam grandes quantidades de bebidas alcólicas. Desde então, ...
 
 ''')
