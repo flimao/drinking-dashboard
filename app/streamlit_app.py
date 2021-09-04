@@ -145,7 +145,7 @@ A Europa é a maior consumidora de bebidas alcoólicas, bebendo em média 40% a 
 
 Há um aumento de ± 25% no consumo de álcool da Europa na década de 70. Este aumento se reverteu lentamente durante a década de 80, até se estabilizar no nível anterior.
     
-Esse aumento pontual não foi observado nas outras regiões.
+Esse aumento pontual não foi observado nas outras regiões, que experimentam leve aumento ao longo das décadas.
 ''')
 
 ### gráfico de barras do consumo de álcool por religião
@@ -160,13 +160,13 @@ barrel = px.bar(dfrel,
     x = 'MajorReligion_top', y = 'Total_BottlesWinePerMonth', 
     title = 'Consumo de álcool por religião', labels = labels,
     error_y = 'Total_BottlesWinePerMonth_error', 
-    color_discrete_sequence = color_palette
+    color_discrete_sequence = color_palette,
 )
 
 barrel.update_traces(
     hovertemplate = 
-    '<b>Religião: %{x}</b><br>' +
-    labels['Total_BottlesWinePerMonth'] +': %{y:.1f} garrafas'+
+    '<b>' + labels['MajorReligion'] + ': %{x}</b><br>' +
+    labels['Total_BottlesWinePerMonth'] + ": %{y:.1f} ± %{error_y.array:.1f} garrafas " +
     '<extra></extra>',
     error_y_color = color_palette[-1],
     error_y_thickness = 3
@@ -190,7 +190,7 @@ consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
     
 **Anglicanos** bebem substancialmente menos que Católicos Romanos, consumindo por volta de 1.5 garrafa de vinho por mês por pessoa.
 
-As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoa que se dizem **sem religião**, tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
+As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoas que se dizem **sem religião**, tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
 ''')
 
 ### relação entre consumo de bebidas alcoólicas e expectativa de vida
@@ -206,6 +206,10 @@ sct = px.scatter(df, y = 'LifeExp', x = 'Total_BottlesWinePerMonth',
 
 sct.update_traces(
     marker_size = 10,
+    hovertemplate = "<b>%{customdata[0]}</b> (%{data.name}) <br>" +
+    labels['Total_BottlesWinePerMonth'] + ': %{x:.1f} <br>' +
+    labels['LifeExp'] + ': %{y:.1f} <br>' +
+    '<extra></extra>'
 )
 
 sct.update_layout(
@@ -227,11 +231,27 @@ st.info(fr'Parece que não há uma relação muito clara entre a quantidade de �
 st.markdown('---')
 st.header('Mapas')
 
+
 mapa = px.choropleth(df, locations = 'CountryCode', color="Total_BottlesWinePerMonth", 
     range_color = [0, df['Total_BottlesWinePerMonth'].quantile(q = 0.975)],
-    hover_name = 'Country', hover_data = ['MajorReligion'],
-    animation_frame = 'Year', labels = labels
+    hover_name = 'Country',
+    animation_frame = 'Year', labels = labels,
+    custom_data = ['MajorReligion', 'LifeExp']
 )
+
+hovertemplate_all = ("<b>%{hovertext}</b> (%{location}) <br><br>" +
+    labels['MajorReligion'] + ": %{customdata[0]}<br>" +
+    labels['Total_BottlesWinePerMonth'] + ": %{z:.1f}<br>" +
+    labels['LifeExp'] + ": %{customdata[1]:.1f}"
+)
+
+mapa.update_traces(
+    hovertemplate = hovertemplate_all
+)
+
+for frame in mapa['frames']:
+    frame['data'][0].update(dict(hovertemplate = hovertemplate_all))
+
 
 mapa.update_layout(
     autosize=False,
@@ -249,6 +269,10 @@ mapa.update_geos(
 st.plotly_chart(mapa, use_container_width = True)
 
 st.success(fr'''{conclusao}
-Até meados da década de 80, A Austrália, o Chile e a Europa como um todo consumiam grandes quantidades de bebidas alcoólicas. Desde então, ...
+Até meados da década de 80, a Austrália, a Argentina e a Europa como um todo consumiam grandes quantidades de bebidas alcoólicas (em comparação com o resto dos países). 
+Desde então, estes países vem diminuindo seu consumo lentamente, se estabilizando em patamares por volta de 8 garrafas de vinho por mês por pessoa.
 
+A partir da década de 90, a Rússia vem aumentando seu consumo de bebidas alcoólicas, passando de ± 4 garrafas de vinho por mês por pessoa no fim da década de 80 para 10 garrafas  em 2011.
+
+A China segue um padrão parecido com o da Rússia, só que defasado de 1 década. Ela passou de ± 4 garrafas no começo da década de 2000 para por volta de 7 garrafas em 2011.
 ''')
