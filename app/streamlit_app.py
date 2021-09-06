@@ -62,16 +62,16 @@ labels = {
 
 # construção do mapa de cores consistente em todos os gráficos
 regions = df['Region'].unique()
-color_palette = px.colors.qualitative.G10
-color_palette = [
-            "#348ABD",
-            "#A60628",
-            "#7A68A6",
-            "#467821",
-            "#CF4457",
-            "#188487",
-            "#E24A33"
-  ]
+color_palette = px.colors.qualitative.Set2
+# color_palette = [
+#             "#348ABD",
+#             "#A60628",
+#             "#7A68A6",
+#             "#467821",
+#             "#CF4457",
+#             "#188487",
+#             "#E24A33"
+#   ]
 
 region_colors = { region: color for region, color in zip(regions, color_palette[:len(regions)]) }
 
@@ -107,7 +107,7 @@ st.subheader('Conjunto de dados a ser utilizado para o projeto (amostra)')
 st.dataframe(df.sample(5))
 
 # aqui começam os gráficos
-st.header('Investigação')
+st.header('Conclusões')
 
 ### gráfico de linha para mostrar a evolução do consumo de bebidas alcoólicas ao longo do tempo por regiao
 dfline = df.groupby(['Year', 'Region']).mean().reset_index()
@@ -122,10 +122,28 @@ alcline.update_traces(
     hovertemplate =
         '<b>%{fullData.name}</b><br>' + 
         labels['Total_BottlesWinePerMonth'] +': %{y:.1f} garrafas'+
-        '<extra></extra>'
+        '<extra></extra>',
+    line_width = 3
 )
 
 alcline.update_layout(
+    yaxis = dict(
+        tickfont_size = 14,
+        title_font_size = 16,
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
+        zerolinecolor = 'rgba(255, 255, 255, 0.4)',
+
+    ),
+    xaxis = dict(
+        tickfont_size = 14,
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
+        title_font_size = 16,
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
+    ),
+    title = dict(
+        font_size = 20
+    ),
     autosize=False,
     width=5000,
     height=600,
@@ -143,7 +161,8 @@ st.success(fr'''{conclusao}
 A Europa é a maior consumidora de bebidas alcoólicas, bebendo em média 40% a mais que as Américas (2ª maior consumidora).
 
 
-Há um aumento de ± 25% no consumo de álcool da Europa na década de 70. Este aumento se reverteu lentamente durante a década de 80, até se estabilizar no nível anterior.
+Há um aumento de ± 25% no consumo de álcool da Europa e das nações do Leste do Mediterrâneo na década de 70. 
+Este aumento se reverteu lentamente durante a década de 80, até se estabilizar no nível anterior.
     
 Esse aumento pontual não foi observado nas outras regiões, que experimentam leve aumento ao longo das décadas.
 ''')
@@ -168,18 +187,41 @@ barrel.update_traces(
     '<b>' + labels['MajorReligion'] + ': %{x}</b><br>' +
     labels['Total_BottlesWinePerMonth'] + ": %{y:.1f} ± %{error_y.array:.1f} garrafas " +
     '<extra></extra>',
-    error_y_color = color_palette[-1],
-    error_y_thickness = 3
+    error_y_color = color_palette[-3],
+    error_y_thickness = 3,
+    #marker_color = 'darkblue',
+    #selected_marker_color = 'darkblue',
+    unselected = dict(
+        marker_color = 'rgba(255, 255, 255, 0.3)',
+        textfont_color = 'rgba(255, 255, 255, 0.3)',
+    )
 )
 barrel.update_layout(
+    yaxis = dict(
+        tickfont_size = 14,
+        title_font_size = 16,
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
+        zerolinecolor = 'rgba(255, 255, 255, 0.4)',
+        gridcolor = 'rgba(255,255,255,0.1)'
+
+    ),
+    xaxis = dict(
+        tickfont_size = 14,
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
+        title_font_size = 16,
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
+        categoryorder = 'total descending',
+    ),
     autosize=False,
     width=5000,
     height=600,
-    xaxis = {'categoryorder': 'total descending'},
     hoverlabel_bgcolor = 'rgba(20,20,20,0.7)',
     paper_bgcolor = 'rgba(0,0,0,0)',
     plot_bgcolor = 'rgba(0,0,0,0)',
-    yaxis_gridcolor = 'rgba(255,255,255,0.1)',
+    title = dict(
+        font_size = 20
+    )
 )
 
 st.plotly_chart(barrel, use_container_width = True)
@@ -213,6 +255,19 @@ sct.update_traces(
 )
 
 sct.update_layout(
+    yaxis = dict(
+        tickfont_size = 14,
+        title_font_size = 16,
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
+    ),
+    xaxis = dict(
+        tickfont_size = 14,
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
+        title_font_size = 16,
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
+        zerolinecolor = 'rgba(255, 255, 255, 0.4)',
+    ),
     autosize=False,
     width=5000,
     height=600,
@@ -220,6 +275,9 @@ sct.update_layout(
     plot_bgcolor = 'rgba(0,0,0,0)',
     xaxis_gridcolor = 'rgba(255,255,255,0.3)',
     yaxis_gridcolor = 'rgba(255,255,255,0.3)',
+    title = dict(
+        font_size = 19
+    ),
 )
 
 st.plotly_chart(sct, use_container_width = True)
@@ -255,15 +313,17 @@ for frame in mapa['frames']:
 
 mapa.update_layout(
     autosize=False,
-    width=1100,
-    height=600,
+    width=5000,
+    height=700,
     title = 'Consumo de bebidas alcoólicas (em garrafas de vinho equivalentes por mês por pessoa, entre 1960 e 2011)',
     paper_bgcolor = 'rgba(0,0,0,0)',
     plot_bgcolor = 'rgba(0,0,0,0)',
 )
 
 mapa.update_geos(
-    oceancolor = 'blue'
+    bgcolor = 'lightblue',
+    oceancolor = 'lightblue',
+    lakecolor = 'lightblue'
 )
 
 st.plotly_chart(mapa, use_container_width = True)
