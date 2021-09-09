@@ -1,113 +1,113 @@
-Country or Area,MajorReligion,CountryCode
-Albania,Muslim,ALB
-Anguilla,Anglican,AIA
-Antigua and Barbuda,Anglican,ATG
-Armenia,Armenian Apostolic,ARM
-Aruba,Roman Catholic,ABW
-Australia,No Religion,AUS
-Austria,Roman Catholic,AUT
-Bahamas,Baptist,BHS
-Bahrain,Muslim,BHR
-Bangladesh,Muslim,BGD
-Barbados,Anglican,BRB
-Belize,Roman Catholic,BLZ
-Bermuda,None,BMU
-Botswana,Roman Catholic,BWA
-Brazil,Roman Catholic,BRA
-British Virgin Islands,Methodist,VGB
-Brunei Darussalam,Muslim,BRN
-Bulgaria,Eastern Orthodox,BGR
-Burkina Faso,Muslim,BFA
-Burundi,Roman Catholic,BDI
-Cambodia,Buddhist,KHM
-Canada,Roman Catholic,CAN
-Cayman Islands,Church of God,CYM
-Chile,Roman Catholic,CHL
-Cook Islands,Cook Islands Christian Church,COK
-Croatia,Roman Catholic,HRV
-Cyprus,Orthodox,CYP
-Czechia,Unknown,CZE
-Côte d'Ivoire,Muslim,CIV
-Dominica,Roman Catholic,DMA
-Estonia,No Religion,EST
-Ethiopia,Orthodox,ETH
-Falkland Islands (Malvinas),Roman Catholic,FLK
-Fiji,Methodist,FJI
-Finland,Lutheran,FIN
-Georgia,Christian Orthodox,GEO
-Germany,Other,DEU
-Ghana,Pentecostal,GHA
-Gibraltar,Roman Catholic,GIB
-Guinea,Muslim,GIN
-Guinea-Bissau,Muslim,GNB
-Hungary,Roman Catholic,HUN
-India,Hindu,IND
-Indonesia,Muslim,IDN
-Iran (Islamic Republic of),Muslim,IRN
-Ireland,Roman Catholic,IRL
-Israel,Jewish,ISR
-Jamaica,No Religion,JAM
-Kazakhstan,Islam ,KAZ
-Kenya,Protestant,KEN
-Kiribati,Roman Catholic,KIR
-Lao People's Democratic Republic,Buddhist,LAO
-Liberia,Roman Catholic,LBR
-Liechtenstein,Roman Catholic,LIE
-Lithuania,Roman Catholic,LTU
-Malawi,Roman Catholic,MWI
-Malaysia,Total,MYS
-Maldives,Islam ,MDV
-Marshall Islands,Protestant,MHL
-Mauritius,Hindu,MUS
-Mexico,Roman Catholic,MEX
-Micronesia (Federated States of),Roman Catholic,FSM
-Mongolia,Buddhist,MNG
-Montenegro,Christian Orthodox,MNE
-Montserrat,Anglican,MSR
-Mozambique,Roman Catholic,MOZ
-Myanmar,Buddhist,MMR
-Nepal,Hindu,NPL
-New Zealand,No Religion,NZL
-Nicaragua,Roman Catholic,NIC
-Niger,Muslim,NER
-Niue,Ekalesia Niue,NIU
-Norfolk Island,Church of England,NFK
-North Macedonia,Orthodox,MKD
-Palau,Roman Catholic,PLW
-Paraguay,Roman Catholic,PRY
-Peru,Roman Catholic,PER
-Philippines,Roman Catholic,PHL
-Poland,Roman Catholic,POL
-Portugal,Roman Catholic,PRT
-Qatar,Muslim,QAT
-Republic of Korea,No Religion,KOR
-Republic of Moldova,Orthodox,MDA
-Romania,Orthodox,ROU
-Rwanda,Roman Catholic,RWA
-Saint Helena ex. dep.,Anglican,SHN
-Saint Lucia,Roman Catholic,LCA
-Saint Vincent and the Grenadines,Anglican,VCT
-Samoa,Congregational,WSM
-Sao Tome and Principe,Roman Catholic,STP
-Serbia,Serbian Orthodox,SRB
-Seychelles,Roman Catholic,SYC
-Singapore,Buddhist,SGP
-Sint Maarten (Dutch part),Roman Catholic,SXM
-Slovakia,Roman Catholic,SVK
-Slovenia,Roman Catholic,SVN
-South Africa,No Religion,ZAF
-Sri Lanka,Buddhist,LKA
-State of Palestine,Islam ,PSE
-Suriname,Roman Catholic,SUR
-Switzerland,Roman Catholic,CHE
-Thailand,Buddhist,THA
-Timor-Leste,Roman Catholic,TLS
-Tokelau,Christian Congregational,TKL
-Tonga,Free Wesleyan Church,TON
-Trinidad and Tobago,Roman Catholic,TTO
-Tuvalu,Church of Tuvalu,TUV
-Uganda,Roman Catholic,UGA
-United Kingdom of Great Britain and Northern Ireland,Roman Catholic,GBR
-Vanuatu,Presbyterian,VUT
-Viet Nam,No Religion,VNM
-Zambia,Protestant,ZMB
+Country or Area,MajorReligion,MajorReligionPop,CountryCode
+Albania,Muslim,1587608,ALB
+Anguilla,Anglican,3313,AIA
+Antigua and Barbuda,Anglican,19767,ATG
+Armenia,Armenian Apostolic,2796519,ARM
+Aruba,Roman Catholic,76464,ABW
+Australia,No Religion,6933708,AUS
+Austria,Roman Catholic,5915421,AUT
+Bahamas,Baptist,122500,BHS
+Bahrain,Muslim,866888,BHR
+Bangladesh,Muslim,111393250,BGD
+Barbados,Anglican,53969,BRB
+Belize,Roman Catholic,129456,BLZ
+Bermuda,None,11466,BMU
+Botswana,Roman Catholic,1171537,BWA
+Brazil,Roman Catholic,123280172,BRA
+British Virgin Islands,Methodist,4941,VGB
+Brunei Darussalam,Muslim,309962,BRN
+Bulgaria,Eastern Orthodox,4374135,BGR
+Burkina Faso,Muslim,8485149,BFA
+Burundi,Roman Catholic,4941833,BDI
+Cambodia,Buddhist,12984523,KHM
+Canada,Roman Catholic,12728880,CAN
+Cayman Islands,Church of God,12459,CYM
+Chile,Roman Catholic,7853428,CHL
+Cook Islands,Cook Islands Christian Church,7356,COK
+Croatia,Roman Catholic,3697143,HRV
+Cyprus,Orthodox,653635,CYP
+Czechia,Unknown,4662455,CZE
+Côte d'Ivoire,Muslim,9618121,CIV
+Dominica,Roman Catholic,42174,DMA
+Estonia,No Religion,592588,EST
+Ethiopia,Orthodox,32092182,ETH
+Falkland Islands (Malvinas),Roman Catholic,1985,FLK
+Fiji,Methodist,289923,FJI
+Finland,Lutheran,4207192,FIN
+Georgia,Christian Orthodox,3097573,GEO
+Germany,Other,32783750,DEU
+Ghana,Pentecostal,6980792,GHA
+Gibraltar,Roman Catholic,23223,GIB
+Guinea,Muslim,9358718,GIN
+Guinea-Bissau,Muslim,650402,GNB
+Hungary,Roman Catholic,3691389,HUN
+India,Hindu,827578868,IND
+Indonesia,Muslim,207176162,IDN
+Iran (Islamic Republic of),Muslim,79598054,IRN
+Ireland,Roman Catholic,3861335,IRL
+Israel,Jewish,4476225,ISR
+Jamaica,No Religion,571988,JAM
+Kazakhstan,Islam ,11239176,KAZ
+Kenya,Protestant,15777430,KEN
+Kiribati,Roman Catholic,63116,KIR
+Lao People's Democratic Republic,Buddhist,4201993,LAO
+Liberia,Roman Catholic,2975675,LBR
+Liechtenstein,Roman Catholic,27599,LIE
+Lithuania,Roman Catholic,2350478,LTU
+Malawi,Roman Catholic,13581623,MWI
+Malaysia,Total,27484596,MYS
+Maldives,Islam ,377651,MDV
+Marshall Islands,Protestant,27849,MHL
+Mauritius,Hindu,469313,MUS
+Mexico,Roman Catholic,92924489,MEX
+Micronesia (Federated States of),Roman Catholic,56365,FSM
+Mongolia,Buddhist,1009357,MNG
+Montenegro,Christian Orthodox,446858,MNE
+Montserrat,Anglican,937,MSR
+Mozambique,Roman Catholic,5748176,MOZ
+Myanmar,Buddhist,45185449,MMR
+Nepal,Hindu,21551492,NPL
+New Zealand,No Religion,1635348,NZL
+Nicaragua,Roman Catholic,2652985,NIC
+Niger,Muslim,16978889,NER
+Niue,Ekalesia Niue,981,NIU
+Norfolk Island,Church of England,755,NFK
+North Macedonia,Orthodox,1310184,MKD
+Palau,Roman Catholic,9825,PLW
+Paraguay,Roman Catholic,3488086,PRY
+Peru,Roman Catholic,17635339,PER
+Philippines,Roman Catholic,80304061,PHL
+Poland,Roman Catholic,33331533,POL
+Portugal,Roman Catholic,7281887,PRT
+Qatar,Muslim,576391,QAT
+Republic of Korea,No Religion,27498715,KOR
+Republic of Moldova,Orthodox,2528152,MDA
+Romania,Orthodox,16307004,ROU
+Rwanda,Roman Catholic,4599371,RWA
+Saint Helena ex. dep.,Anglican,2995,SHN
+Saint Lucia,Roman Catholic,105755,LCA
+Saint Vincent and the Grenadines,Anglican,18864,VCT
+Samoa,Congregational,56818,WSM
+Sao Tome and Principe,Roman Catholic,99570,STP
+Serbia,Serbian Orthodox,6079396,SRB
+Seychelles,Roman Catholic,67280,SYC
+Singapore,Buddhist,1032879,SGP
+Sint Maarten (Dutch part),Roman Catholic,11134,SXM
+Slovakia,Roman Catholic,3347277,SVK
+Slovenia,Roman Catholic,1135626,SVN
+South Africa,No Religion,6767165,ZAF
+Sri Lanka,Buddhist,14272056,LKA
+State of Palestine,Islam ,3568020,PSE
+Suriname,Roman Catholic,262320,SUR
+Switzerland,Roman Catholic,2532217,CHE
+Thailand,Buddhist,61746429,THA
+Timor-Leste,Roman Catholic,715285,TLS
+Tokelau,Christian Congregational,603,TKL
+Tonga,Free Wesleyan Church,35082,TON
+Trinidad and Tobago,Roman Catholic,285671,TTO
+Tuvalu,Church of Tuvalu,8521,TUV
+Uganda,Roman Catholic,10242594,UGA
+United Kingdom of Great Britain and Northern Ireland,Roman Catholic,37583962,GBR
+Vanuatu,Presbyterian,65345,VUT
+Viet Nam,No Religion,61570544,VNM
+Zambia,Protestant,9436231,ZMB
