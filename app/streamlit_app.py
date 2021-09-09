@@ -46,7 +46,12 @@ df_full = (df_raw
 )
 df = df_full[(df_full.Year > 1960) & (df_full.Year <= 2011)]
 df['MajorReligion_top'] = topnrels(6)
+
+# para converter para garrafas de vinho por mes: 12% de álcool no vinho, garrafa de 750 ml, 12 meses no ano
 df['Total_BottlesWinePerMonth'] = df['Total_LitersAlcPerYear'] * (1 / (0.12 * 0.75 * 12))
+
+# para converter para latinhas de cerveja por semana: 5% de álcool na cerveja, latinha de 350 ml, 52 semanas no ano
+df['Total_BeerCansPerWeek'] = df['Total_LitersAlcPerYear'] * (1 / (0.05 * 0.35 * 52))
 
 # labels das colunas, para rotular nos gráficos
 labels = {
@@ -56,6 +61,7 @@ labels = {
     'Year': 'Ano',
     'Spirits_LitersPerYear': 'Destilados (L/ano)',
     'Total_BottlesWinePerMonth': 'Garrafas de vinho por mês por pessoa',
+    'Total_BeerCansPerWeek': 'Latas de cerveja por semana por pessoa',
     'MajorReligion': 'Religião',
     'MajorReligion_top': 'Religião'
 }
@@ -143,6 +149,9 @@ alcline.update_layout(
     ),
     title = dict(
         font_size = 20
+    ),
+    legend = dict(
+        font_size = 14,
     ),
     autosize=False,
     width=5000,
