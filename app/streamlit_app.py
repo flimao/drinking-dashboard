@@ -277,6 +277,9 @@ sct.update_layout(
         title_font_color = 'rgba(255, 255, 255, 0.7)',
         zerolinecolor = 'rgba(255, 255, 255, 0.4)',
     ),
+    legend = dict(
+        font_size = 14,
+    ),
     autosize=False,
     width=5000,
     height=600,
@@ -288,6 +291,14 @@ sct.update_layout(
         font_size = 19
     ),
 )
+
+sct['layout']['sliders'][0]['currentvalue'].update({
+        'prefix': 'Ano: ',
+        'font': { 'size': 16 },
+})
+sct['layout']['sliders'][0].update({
+        'font': { 'size': 14 },
+})
 
 st.plotly_chart(sct, use_container_width = True)
 
@@ -327,13 +338,29 @@ mapa.update_layout(
     title = 'Consumo de bebidas alcoólicas (em garrafas de vinho equivalentes por mês por pessoa, entre 1960 e 2011)',
     paper_bgcolor = 'rgba(0,0,0,0)',
     plot_bgcolor = 'rgba(0,0,0,0)',
+    coloraxis_colorbar = dict(
+        title_font_size = 16,
+        title_font_color = 'rgba(0, 0, 0, 0.7)',
+        tickfont_size = 14,
+        tickfont_color = 'rgba(0, 0, 0, 0.7)',
+    ),
 )
+
+# atualizar fonte do slider de animação
+mapa['layout']['sliders'][0]['currentvalue'].update({
+        'prefix': 'Ano: ',
+        'font': { 'size': 16 },
+})
+mapa['layout']['sliders'][0].update({
+        'font': { 'size': 14 },
+})
 
 mapa.update_geos(
     bgcolor = 'lightblue',
     oceancolor = 'lightblue',
     lakecolor = 'lightblue'
 )
+
 
 st.plotly_chart(mapa, use_container_width = True)
 
@@ -345,3 +372,5 @@ A partir da década de 90, a Rússia vem aumentando seu consumo de bebidas alco�
 
 A China segue um padrão parecido com o da Rússia, só que defasado de 1 década. Ela passou de ± 4 garrafas no começo da década de 2000 para por volta de 7 garrafas em 2011.
 ''')
+
+# st.text(mapa)
