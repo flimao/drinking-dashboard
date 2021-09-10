@@ -28,8 +28,17 @@ def set_png_as_page_bg(png_file):
 dfrel = pd.read_csv(r'datasets/religiao-tratado.csv')
 
 # função para calcular as n maiores religioes, considerando o número de países que as seguem
-def topnrels(n, df = dfrel):
-    toprels = df.MajorReligion.value_counts().head(n)
+def topnrels(n, df = dfrel, by = 'count'):
+    
+    if by == 'popsum':
+        toprels = (df
+            .groupby('MajorReligion')['MajorReligionPop'].sum()
+            .sort_values(ascending = False)
+            .head(n)
+        )
+    else:
+        toprels = df.MajorReligion.value_counts().head(n)
+    
     s = df.MajorReligion.where(df.MajorReligion.isin(toprels.index), 'Outros')
     s.name = 'MajorReligion_top'
     s.astype('category')
@@ -41,11 +50,12 @@ df_full = (df_raw
     .astype({
         'Region': 'category',
         'IncomeGroup': 'category',
-        'MajorReligion': 'category'
+        'MajorReligion': 'category',
+        'MajorReligionPop': 'UInt64'
     })
 )
 df = df_full[(df_full.Year > 1960) & (df_full.Year <= 2011)]
-df['MajorReligion_top'] = topnrels(6)
+df['MajorReligion_top'] = topnrels(6, by = 'popsum')
 
 # para converter para garrafas de vinho por mes: 12% de álcool no vinho, garrafa de 750 ml, 12 meses no ano
 df['Total_BottlesWinePerMonth'] = df['Total_LitersAlcPerYear'] * (1 / (0.12 * 0.75 * 12))
@@ -93,24 +103,44 @@ conclusao = r'**_Pontos notáveis_**:'
 
 set_png_as_page_bg('app/res/chalkboard2.jpg')
 st.markdown(
-        f"""
-        <style>
-            .reportview-container .main .block-container{{
-                max-width: 65%;
-            }}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    f"""
+    <style>
+        .reportview-container .main .block-container{{
+            max-width: 65%;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # aqui começa o conteúdo
 st.title('Análise de consumo de álcool :beer:, expectativa de vida :older_woman: e religião :pray: em cada país')
+
+st.caption('Projeto #2 do Módulo de Bibliotecas e APIs, Data Science Degree da Let´s Code. Grupo: **[Felipe Oliveira](https://www.github.com/flimao), [Pedro Russo](https://www.github.com/pedrostrusso) e Vitor Castro**')
 
 st.header('Premissa')
 st.write('Vamos analisar a relação entre o consumo de álcool (cerveja, vinho e bebidas destiladas), a expectativa de vida e a religião de cada país')
 
 st.subheader('Conjunto de dados a ser utilizado para o projeto (amostra)')
 st.dataframe(df.sample(5))
+
+st.subheader('Descrição dos dados e unidades de medida')
+st.markdown('''
+Os dados sobre consumo alcóolico são provenientes do [Global Health Observatory, da Organização Mundial da Saúde](https://apps.who.int/gho/data/node.home). 
+
+Esses dados foram coletados em uma pesquisa que listava três tipos de bebidas alcóolicas (cerveja, vinho e bebidas destiladas), e solicitava das pessoas o consumo anual de cada uma delas.
+O número final registrado é uma estimativa do total de litros de álcool puro consumidos anualmente por respondente. 
+
+Por exemplo, Se uma pessoa disse que consumiu 50 litros de vinho em um ano, 
+a quantidade de litros de álcool puro registrada na pesquisa é **50 litros vezes a concentração alcóolica por volume do vinho típico (considerado 12%)**, ou 6 litros de álcool puro anuais. 
+**Esse número é somado ao total de litros de álcool puro consumidos em forma de cerveja e de bebidas destiladas**, resultando o número final registrado para o respondente.
+
+Visto que o total de litros de álcool puro é uma unidade de medida muito abstrata, **convertemos para o equivalente em garrafas de vinho por mês por pessoa**. Note que essa é só uma **conversão de unidades**;
+não quer dizer que o respondente disse que só bebia vinho, por exemplo. Simplesmente multiplicamos a coluna contendo o total de litros de álcool puro 
+(obtida através do cálculo explicado no parágrafo anterior) por um fator adequado, transformando suas unidades para garrafas de vinho por mês por pessoa.
+''')
+
+# st.text(df.groupby('MajorReligion')['MajorReligionPop'].sum().sort_values(ascending = False))
 
 # aqui começam os gráficos
 st.header('Conclusões')
@@ -120,7 +150,7 @@ dfline = df.groupby(['Year', 'Region']).mean().reset_index()
 alcline = px.scatter(dfline, 
     x = 'Year', y = 'Total_BottlesWinePerMonth', 
     color = 'Region', color_discrete_map = region_colors,
-    title = 'Consumo de álcool ao longo do tempo', labels = labels,
+    title = 'Consumo de álcool ao longo do tempo (equivalente em garrafas de vinho por mês por pessoa)', labels = labels,
 )
 
 alcline.update_traces(
@@ -186,7 +216,7 @@ dfrel = df.groupby(['MajorReligion_top']).agg(
 
 barrel = px.bar(dfrel, 
     x = 'MajorReligion_top', y = 'Total_BottlesWinePerMonth', 
-    title = 'Consumo de álcool por religião', labels = labels,
+    title = 'Consumo de álcool por religião (7 maiores religiões em população)', labels = labels,
     error_y = 'Total_BottlesWinePerMonth_error', 
     color_discrete_sequence = color_palette,
 )
@@ -235,13 +265,26 @@ barrel.update_layout(
 
 st.plotly_chart(barrel, use_container_width = True)
 
+# st.success(rf'''{conclusao} 
+# As pessoas que se dizem **Católicos Romanos** (ou equivalente), **Budistas** ou de outras religiões são as que mais consomem bebidas alcoólicas, 
+# consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
+    
+# **Anglicanos** bebem substancialmente menos que Católicos Romanos, consumindo por volta de 1.5 garrafa de vinho por mês por pessoa.
+
+# As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoas que se dizem **sem religião**, tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
+# ''')
+
 st.success(rf'''{conclusao} 
-As pessoas que se dizem **Católicos Romanos** (ou equivalente), **Budistas** ou de outras religiões são as que mais consomem bebidas alcoólicas, 
+As pessoas que se dizem **Hindus** consomem bebidas alcóolicas em grandes quantidades (o equivalente a 10 garrafas de vinho por mês por pessoa). No entanto, há uma grande variabilidade nessa medida,
+ou seja, alguns respondentes se dizem grande consumidores de bebidas alcóolicas, e outros se dizem abstinentes. No agregado, esse número pode variar entre o equivalente a 3 e 17 garrafas de vinho por mês por pessoa.
+
+Aproximando o gráfico acima de barras acima das religiões em seguida, nota-se que pessoas que se dizem **Católicos Romanos** (ou equivalente) ou **Budistas** vêm em segundo lugar no quesito de consumo de bebidas alcoólicas, 
 consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
     
-**Anglicanos** bebem substancialmente menos que Católicos Romanos, consumindo por volta de 1.5 garrafa de vinho por mês por pessoa.
+Dentre essas sete religiões, os que se dizem **Muçulmanos** são os que menos bebem, consumindo o equivalente a 1.5 a 2.5 garrafas de vinho por mês cada um.
 
-As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoas que se dizem **sem religião**, tem o consumo de bebidas bastante variável; algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
+As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoas que se dizem **sem religião**, assim como os **Hindus**, tem o consumo de bebidas bastante variável; 
+algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
 ''')
 
 ### relação entre consumo de bebidas alcoólicas e expectativa de vida
@@ -294,7 +337,7 @@ sct.update_layout(
 
 sct['layout']['sliders'][0]['currentvalue'].update({
         'prefix': 'Ano: ',
-        'font': { 'size': 16 },
+        'font': { 'size': 16, 'color': 'rgba(255, 255, 255, 0.7)' },
 })
 sct['layout']['sliders'][0].update({
         'font': { 'size': 14 },
@@ -340,9 +383,9 @@ mapa.update_layout(
     plot_bgcolor = 'rgba(0,0,0,0)',
     coloraxis_colorbar = dict(
         title_font_size = 16,
-        title_font_color = 'rgba(0, 0, 0, 0.7)',
+        title_font_color = 'rgba(255, 255, 255, 0.7)',
         tickfont_size = 14,
-        tickfont_color = 'rgba(0, 0, 0, 0.7)',
+        tickfont_color = 'rgba(255, 255, 255, 0.7)',
     ),
 )
 
