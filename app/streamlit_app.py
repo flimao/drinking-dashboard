@@ -116,7 +116,10 @@ st.markdown(
 # aqui começa o conteúdo
 st.title('Análise de consumo de álcool :beer:, expectativa de vida :older_woman: e religião :pray: em cada país')
 
-st.caption('Projeto #2 do Módulo de Bibliotecas e APIs, Data Science Degree da Let´s Code. Grupo: **[Felipe Oliveira](https://www.github.com/flimao), [Pedro Russo](https://www.github.com/pedrostrusso) e Vitor Castro**')
+st.caption((
+    'Projeto #2 do Módulo de Bibliotecas e APIs, Data Science Degree da Let´s Code. ' 
+    'Grupo: **[Felipe Oliveira](https://www.github.com/flimao)**, **[Pedro Russo](https://www.github.com/pedrostrusso)** e **[Vitor Castro](https://www.linkedin.com/in/vitor-castro-502b19220)**.'
+))
 
 st.header('Premissa')
 st.write('Vamos analisar a relação entre o consumo de álcool (cerveja, vinho e bebidas destiladas), a expectativa de vida e a religião de cada país')
@@ -282,16 +285,17 @@ st.plotly_chart(barrel, use_container_width = True)
 # ''')
 
 st.success(rf'''{conclusao} 
-As pessoas que se dizem **Hindus** consomem bebidas alcóolicas em grandes quantidades (o equivalente a 10 garrafas de vinho por mês por pessoa). No entanto, há uma grande variabilidade nessa medida,
-ou seja, alguns respondentes se dizem grande consumidores de bebidas alcóolicas, e outros se dizem abstinentes. No agregado, esse número pode variar entre o equivalente a 3 e 17 garrafas de vinho por mês por pessoa.
+As pessoas que se dizem **Hindus** consomem bebidas alcóolicas em maior quantidade (o equivalente a 10 garrafas de vinho por mês por pessoa, em média). 
+No entanto, há uma grande variabilidade nessa medida, ou seja, alguns respondentes se dizem grande consumidores de bebidas alcóolicas, outros se dizem 
+abstinentes. No agregado, esse número pode variar entre o equivalente a 3 e 17 garrafas de vinho por mês por pessoa na média em cada ano.
 
-Aproximando o gráfico acima de barras acima das religiões em seguida, nota-se que pessoas que se dizem **Católicos Romanos** (ou equivalente) ou **Budistas** vêm em segundo lugar no quesito de consumo de bebidas alcoólicas, 
-consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
+Aproximando o gráfico acima de barras acima das religiões em seguida, nota-se que pessoas que se dizem **Católicos Romanos** (ou equivalente) ou 
+**Budistas** vêm em segundo lugar no quesito de consumo de bebidas alcoólicas, consumindo cada um o equivalente a entre 2 e 4.5 garrafas de vinho por mês.
     
 Dentre essas sete religiões, os que se dizem **Muçulmanos** são os que menos bebem, consumindo o equivalente a 1.5 a 2.5 garrafas de vinho por mês cada um.
 
-As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoas que se dizem **sem religião**, assim como os **Hindus**, tem o consumo de bebidas bastante variável; 
-algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
+As pessoas que se dizem **Católicas Ortodoxas**, bem como pessoas que se dizem **sem religião**, assim como os **Hindus**, tem o consumo de bebidas bastante 
+variável; algumas consomem bastante e outras não consomem nenhuma bebida alcoólica.
 ''')
 
 ### relação entre consumo de bebidas alcoólicas e expectativa de vida
