@@ -150,7 +150,7 @@ dfline = df.groupby(['Year', 'Region']).mean().reset_index()
 alcline = px.scatter(dfline, 
     x = 'Year', y = 'Total_BottlesWinePerMonth', 
     color = 'Region', color_discrete_map = region_colors,
-    title = 'Consumo de álcool ao longo do tempo (equivalente em garrafas de vinho por mês por pessoa)', labels = labels,
+    title = 'Consumo de álcool ao longo do tempo <br>(equivalente em garrafas de vinho por mês por pessoa)', labels = labels,
 )
 
 alcline.update_traces(
@@ -182,10 +182,17 @@ alcline.update_layout(
     ),
     legend = dict(
         font_size = 14,
+        orientation = 'h',
+        yanchor = 'bottom',
+        y = 1.03,
+        title_font_size = 16,
     ),
     autosize=False,
-    width=5000,
-    height=600,
+    margin = dict(
+        t = 220,
+    ),
+    width = 5000,
+    height = 700,
     hovermode = 'x unified',
     paper_bgcolor = 'rgba(0,0,0,0)',
     plot_bgcolor = 'rgba(0,0,0,0)',
@@ -294,7 +301,7 @@ sct = px.scatter(df, y = 'LifeExp', x = 'Total_BottlesWinePerMonth',
     color = 'Region', color_discrete_map = region_colors,
     animation_frame = 'Year',
     hover_data = ['Country'],
-    title = 'Relação entre total de álcool consumido (garrafas de vinho equivalente por mês por pessoa) e Expectativa de vida',
+    title = 'Relação entre total de álcool consumido <br>(garrafas de vinho equivalente por mês por pessoa) e Expectativa de vida',
     labels = labels
 )
 
@@ -322,17 +329,24 @@ sct.update_layout(
     ),
     legend = dict(
         font_size = 14,
+        orientation = 'h',
+        yanchor = 'bottom',
+        y = 1.03,
+        title_font_size = 16,
+    ),
+    title = dict(
+        font_size = 19,
+    ),
+    margin = dict(
+        t = 220,
     ),
     autosize=False,
-    width=5000,
-    height=600,
+    width = 5000,
+    height = 700,
     paper_bgcolor = 'rgba(0,0,0,0)',
     plot_bgcolor = 'rgba(0,0,0,0)',
     xaxis_gridcolor = 'rgba(255,255,255,0.3)',
     yaxis_gridcolor = 'rgba(255,255,255,0.3)',
-    title = dict(
-        font_size = 19
-    ),
 )
 
 sct['layout']['sliders'][0]['currentvalue'].update({
@@ -378,13 +392,14 @@ mapa.update_layout(
     autosize=False,
     width=5000,
     height=700,
-    title = 'Consumo de bebidas alcoólicas (em garrafas de vinho equivalentes por mês por pessoa, entre 1960 e 2011)',
+    title = 'Consumo de bebidas alcoólicas <br>(em garrafas de vinho equivalentes por mês por pessoa, entre 1960 e 2011)',
     paper_bgcolor = 'rgba(0,0,0,0)',
     plot_bgcolor = 'rgba(0,0,0,0)',
     coloraxis_colorbar = dict(
-        title_font_size = 16,
+        title_text = 'Garrafas de vinho',
+        title_font_size = 14,
         title_font_color = 'rgba(255, 255, 255, 0.7)',
-        tickfont_size = 14,
+        tickfont_size = 13,
         tickfont_color = 'rgba(255, 255, 255, 0.7)',
     ),
 )
